@@ -62,12 +62,11 @@
         success: function(d) {
           $('#linkPop').fadeIn(1000);
           var domain = window.location.hostname;
-          if ( domain == '0.0.0.0' ) {
-              // If application is run on local we need to append the port number.
-              $('#linkDetail').empty().append(window.location.hostname + ':5000/read?slug=' + d.slug);
-          } else {
-              $('#linkDetail').empty().append(window.location.hostname + '/read?slug=' + d.slug);
+          var port = '';
+          if (window.location.port != '') {
+              port = ':' + window.location.port;;
           }
+          $('#linkDetail').empty().append(window.location.protocol + '//' + window.location.hostname + port + '/read?slug=' + d.slug);
           $('#linkExpire').empty().append(d.expires);
         },
         complete: function() {

@@ -1,15 +1,12 @@
-# Shhh
+# secret-msg
 
-Shhh is a tiny Flask App to write secrets and share them with people with a secure link.  
-The user can set up an expire date and a passphrase to access the secret.    
+secret-msg is a tiny Flask App, based on https://github.com/smallwat3r/shhh, to write secrets and share them with people with a secure link.  The main difference with shhh are
 
-Secrets and Passphrases are encrypted in order to make the data anonymous, especially in MySQL.  
+- This version throws out everything nonessential.  The smaller the code base, the less code you must review in order to be confident there is no malware embedded.
+- This version fixes a few bugs.
+  Secrets and Passphrases are encrypted in order to make the data anonymous, especially in MySQL.  
 
-**Sender demo:**    
-![Alt Text](https://github.com/smallwat3r/shhh/blob/master/demo/sender.gif)  
 
-**Reader demo:**  
-![Alt Text](https://github.com/smallwat3r/shhh/blob/master/demo/reader.gif)  
 
 
 ## ⚙️ Set up & Dependencies
@@ -89,13 +86,8 @@ some default settings for a containerized instance of MySQL server. To build and
 run Shhh via docker-compose:
 
 ```sh
-docker-compose up -d --build app
+docker-compose up --build app
 ```
 
 Once the container image has finished building and starting, Shhh will be
 available via http://localhost:5000/.
-
-## 💡 Idea credits  
-
-- OneTimeSecret https://github.com/onetimesecret/onetimesecret
-- PasswordPusher https://github.com/pglombardo/PasswordPusher
