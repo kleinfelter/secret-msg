@@ -1,8 +1,10 @@
--- -*- coding: utf-8 -*-
--- File  : initialize.sql
--- Author: Austin Schaffer <schaffer.austin.t@gmail.com>
--- Date  : 18.09.2019
--- Desc  : Initializes tables, settings, and events for the MySQL instance.
+drop database if exists shhh;
+create database shhh;
+CREATE OR REPLACE USER shhh@localhost IDENTIFIED BY 'shhh123';
+GRANT ALL PRIVILEGES ON shhh.* TO 'shhh'@'localhost';
+FLUSH PRIVILEGES;
+
+use shhh;
 
 CREATE TABLE IF NOT EXISTS `links` (
   `slug_link` text,
