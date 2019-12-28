@@ -69,6 +69,8 @@
           myurl = window.location.protocol + '//' + window.location.hostname + port + '/read?slug=' + d.slug;
           $('#linkDetail').empty().append('<a href="' + myurl + '">' + myurl + '</a>');
           $('#linkExpire').empty().append(d.expires);
+          $('#inputSecret').val(''); // hide the data from browser history
+          $('#passPhrase').val('');  // hide the data from browser history
         },
         complete: function() {
           $.unblockUI();

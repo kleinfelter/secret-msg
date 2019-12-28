@@ -5,6 +5,7 @@ secret-msg is a tiny Flask App, based on https://github.com/smallwat3r/shhh, to 
 - This version throws out everything nonessential.  The smaller the code base, the less code you must review in order to be confident there is no malware embedded.
 - This version fixes a few bugs.
   Secrets and Passphrases are encrypted in order to make the data anonymous, especially in MySQL.  
+  Secrets and Passphrases are removed from the browser history, so Ctrl+Shift+Tab does not reveal them.
 
 
 

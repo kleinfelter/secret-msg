@@ -28,3 +28,12 @@ def error_404(error):
 def static_from_root():
     """Robots.txt"""
     return send_from_directory(app.static_folder, request.path[1:])
+
+
+##################
+@app.after_request
+def add_cache_headers(resp):
+    resp.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    resp.headers['Pragma'] = 'no-cache'
+    resp.headers['Expires'] = '0'
+    return resp

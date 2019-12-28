@@ -1,11 +1,11 @@
 # Note: You can't install MySql 5.x on alpine 
 From alpine:3.11 as builder
 
-# Should put the update in the same line as the "apk add" to avoide using a cached update when you add.
 
 # == install the non-python-package stuff
+# Must put the update in the same RUN as the "apk add" to avoide using a cached update when you add.
 RUN apk update && apk add --no-cache python3=3.8.0-r0 python3-dev=3.8.0-r0  && \
-    apk update && apk add --no-cache build-base openssl-dev libffi-dev
+    apk add --no-cache build-base openssl-dev libffi-dev
 RUN ln /usr/bin/pip3 /usr/bin/pip && \
     ln /usr/bin/python3 /usr/bin/python && \
     pip install --upgrade pip

@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<!--
- - File  : read.html
- - Author: Matthieu Petiteau <mpetiteau.pro@gmail.com>
- - Date  : 17.09.2019
--->
 <html lang="en">
 {% include '_header.html' %}
 
 <body>
 
   <main role="main" class="container">
-    <form class="container" id="secretReader">
-      <h1 class="mt-5">Shhh...</h1>
+    <form class="container" id="secretReader" method="post">
+      <h1 class="mt-5">Secret Msg</h1>
 
       <h2>Read Secret</h2>
 
       <label for="passPhrase">Passphrase to open secret</label>
-      <input class="form-control" name="passPhrase" id="passPhrase" placeholder="Passphrase" required>
+      <input class="form-control" type="password" name="passPhrase" id="passPhrase" placeholder="Passphrase" required>
 
       <br />
       <input id="decryptBtn" type="submit" class="btn btn-primary btn-lg" value="Decrypt">
@@ -66,6 +61,8 @@
             $('#linkSuccess').fadeIn(1000);
             $('#secretMsg').empty().append(d.msg);
             $('#decryptBtn').attr('disabled', true);
+            $('#passPhrase').attr('disabled', true);
+            $('#passPhrase').val(''); // hide the password from browser history
           }
         },
         complete: function() {
