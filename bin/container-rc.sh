@@ -3,30 +3,21 @@
 
 echo "Starting container-rc.sh"
 
-grep event_scheduler /etc/my.cnf || sed -i '/\[mysqld\]/a\
-event_scheduler = on
-' /etc/my.cnf
+#mkdir -p /var/log
+#echo "===" > /var/log/mysqld.error
+#chown mysql:mysql /var/log/mysqld.error
+#chown -R mysql:mysql /var/lib/mysql
 
-#sed -i 's/^skip-networking/#skip-networking/' /etc/my.cnf.d/mariadb-server.cnf
-#sed -i 's/^#bind-address=0.0.0.0/bind-address=127.0.0.1/' /etc/my.cnf.d/mariadb-server.cnf
-
-# Start mariadb
-chown -R mysql:mysql /var/lib/mysql
-echo "====="> /var/log/mysqld.error
-chown mysql:mysql /var/log/mysqld.error
-chmod ugo+rw /var/lib/mysql/ibdata1
-
-echo "Starting mysqld_safe"
 mysqld_safe --log-error=/var/log/mysqld.error --skip-syslog &
-sleep 10
+sleep 2
 echo "Checking to see if mysqld is running"
 while ! ps -ef | grep -v grep | grep mysqld ; do
     echo "waiting for mysqld to go active"
-    sleep 5
+    sleep 2
 done
 
 echo "Found active mysqld.  See if it stays up."
-sleep 3
+sleep 5
 echo "Checking"
 
 if ps -ef | grep -v grep | grep mysqld ; then
@@ -42,6 +33,8 @@ if ! [ -r /var/lib/mysql/initialized ] ; then
     date > /var/lib/mysql/initialized
     mysql -u root < /docker-entrypoint-initdb.d/initialize.sql
 fi
+
+export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3.8/site-packages"
 echo "Starting flask"
 python -m flask run --host=0.0.0.0 --port=5000
 

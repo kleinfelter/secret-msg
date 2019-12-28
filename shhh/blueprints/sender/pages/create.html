@@ -62,10 +62,12 @@
           $('#linkPop').fadeIn(1000);
           var domain = window.location.hostname;
           var port = '';
+          var myurl;
           if (window.location.port != '') {
               port = ':' + window.location.port;;
           }
-          $('#linkDetail').empty().append(window.location.protocol + '//' + window.location.hostname + port + '/read?slug=' + d.slug);
+          myurl = window.location.protocol + '//' + window.location.hostname + port + '/read?slug=' + d.slug;
+          $('#linkDetail').empty().append('<a href="' + myurl + '">' + myurl + '</a>');
           $('#linkExpire').empty().append(d.expires);
         },
         complete: function() {
